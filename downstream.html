@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Downstream — Oil & Gas Visual Primer</title>
+  <meta name="description" content="Downstream oil & gas: refining, fuels, petrochemicals, marketing, margins, and key metrics." />
+  <style>
+    :root{
+      --bg:#070A10; --text:rgba(255,255,255,.92); --muted:rgba(255,255,255,.72);
+      --line:rgba(255,255,255,.12); --shadow:0 18px 60px rgba(0,0,0,.55);
+      --radius:18px; --radius2:26px; --max:1180px;
+      --accent:#FF5BD6; --accent2:#6AA8FF; --accent3:#7CFFB2;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0; font-family:var(--sans); color:var(--text);
+      background:
+        radial-gradient(900px 600px at 18% 12%, rgba(255,91,214,.18), transparent 60%),
+        radial-gradient(900px 600px at 80% 22%, rgba(106,168,255,.14), transparent 62%),
+        radial-gradient(900px 600px at 55% 95%, rgba(124,255,178,.10), transparent 60%),
+        var(--bg);
+    }
+    .grain{ pointer-events:none; position:fixed; inset:0; opacity:.10; mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      background-size:240px 240px; animation: drift 14s linear infinite;
+    }
+    @keyframes drift{ from{ transform:translate3d(0,0,0);} to{ transform:translate3d(-120px,60px,0);} }
+
+    a{ color:inherit; text-decoration:none; }
+    header{ position:sticky; top:0; z-index:10; backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(7,10,16,.92), rgba(7,10,16,.55));
+      border-bottom:1px solid rgba(255,255,255,.12);
+    }
+    .nav{ max-width:var(--max); margin:0 auto; padding:14px 22px; display:flex; align-items:center; justify-content:space-between; gap:14px; }
+    .brand{ display:flex; align-items:center; gap:10px; font-weight:720; letter-spacing:.6px; }
+    .logo{ width:36px; height:36px; border-radius:12px;
+      background: radial-gradient(12px 12px at 28% 28%, rgba(255,255,255,.45), transparent 55%),
+      linear-gradient(135deg, rgba(124,255,178,.90), rgba(106,168,255,.80) 55%, rgba(255,91,214,.72));
+      box-shadow:0 10px 26px rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.18);
+    }
+    .navlinks{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .chip{ padding:10px 12px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.05);
+      border-radius:999px; font-size:13px; color:rgba(255,255,255,.70);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .chip:hover{ transform:translateY(-1px); background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.22); color:rgba(255,255,255,.86); }
+    .chip.active{ color:rgba(7,10,16,.90); background:linear-gradient(135deg, rgba(124,255,178,.92), rgba(106,168,255,.85)); border-color:transparent; }
+
+    .wrap{ max-width:var(--max); margin:0 auto; padding: 26px 22px 70px; }
+    .hero{
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border-radius:var(--radius2); box-shadow:var(--shadow);
+      overflow:hidden; position:relative;
+    }
+    .hero::before{
+      content:""; position:absolute; inset:-2px; pointer-events:none; filter: blur(6px);
+      background: radial-gradient(700px 320px at 20% 30%, rgba(255,91,214,.18), transparent 62%),
+                  radial-gradient(700px 320px at 78% 25%, rgba(106,168,255,.14), transparent 62%);
+    }
+    .heroInner{ position:relative; padding: 40px 26px 26px; display:grid; grid-template-columns: 1.15fr .85fr; gap: 16px; }
+    @media (max-width: 900px){ .heroInner{ grid-template-columns: 1fr; } }
+    h1{ margin:0 0 10px; font-size: clamp(32px, 3.6vw, 48px); line-height:1.05; letter-spacing:-.7px; }
+    .sub{ margin:0 0 16px; color:var(--muted); font-size:15px; line-height:1.6; max-width: 72ch; }
+    .pillRow{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 10px; }
+    .pill{ font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+      padding:9px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.05);
+      color:rgba(255,255,255,.78);
+    }
+
+    .side{ border-radius:18px; border:1px solid rgba(255,255,255,.12); background:rgba(0,0,0,.20); padding:16px; }
+    .kicker{ font-family:var(--mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.80); margin-bottom: 10px; }
+    .box{ border-radius:16px; border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.05); padding:12px; margin-bottom:10px; }
+    .box b{ display:block; font-size:13px; margin-bottom:4px; }
+    .box span{ color:var(--muted); font-size:13px; line-height:1.45; }
+
+    .grid{ margin-top: 16px; display:grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .card{ grid-column: span 6; border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      box-shadow: 0 18px 46px rgba(0,0,0,.32);
+      overflow:hidden;
+    }
+    .card .inner{ padding: 18px; }
+    .titleRow{ display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .tag{ font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.78); display:flex; align-items:center; gap:8px; }
+    .dot{ width:8px; height:8px; border-radius:99px; background:var(--accent); box-shadow: 0 0 18px rgba(255,91,214,.50); }
+    h2{ margin: 10px 0 10px; font-size: 18px; letter-spacing: -.2px; }
+    ul{ margin: 10px 0 0; padding-left: 18px; color: var(--muted); line-height:1.65; font-size: 14px; }
+    li{ margin: 6px 0; }
+
+    .wide{ grid-column: span 12; }
+    .metrics{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 10px; }
+    @media (max-width: 950px){ .metrics{ grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 520px){ .metrics{ grid-template-columns: 1fr;} }
+    .metric{ border-radius: 14px; border: 1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.05); padding: 12px; }
+    .metric b{ display:block; font-size:13px; margin-bottom: 4px; }
+    .metric span{ color: var(--muted); font-size: 13px; line-height:1.35; }
+
+    .footer{
+      margin-top: 42px; color: rgba(255,255,255,.55); font-size: 12px;
+      border-top:1px solid rgba(255,255,255,.10); padding-top: 16px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+
+  <header>
+    <nav class="nav">
+      <a class="brand" href="index.html"><span class="logo"></span><span>Oil &amp; Gas — Visual Primer</span></a>
+      <div class="navlinks">
+        <a class="chip" href="index.html">Home</a>
+        <a class="chip" href="upstream.html">Upstream</a>
+        <a class="chip" href="midstream.html">Midstream</a>
+        <a class="chip active" href="downstream.html">Downstream</a>
+        <a class="chip" href="terminology.html">Terminology</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="heroInner">
+        <div>
+          <h1>Downstream (Refining &amp; Products)</h1>
+          <p class="sub">
+            Downstream turns crude into usable products—gasoline, diesel, jet fuel, lubricants, and petrochemical feedstocks.
+            Profitability depends on margins (spreads), utilization, complexity, and logistics.
+          </p>
+          <div class="pillRow">
+            <span class="pill">Refining</span>
+            <span class="pill">Blending</span>
+            <span class="pill">Petrochemicals</span>
+            <span class="pill">Marketing</span>
+            <span class="pill">Retail</span>
+            <span class="pill">Crack spreads</span>
+          </div>
+        </div>
+
+        <aside class="side">
+          <div class="kicker">What matters most</div>
+          <div class="box"><b>Margins</b><span>Crude costs vs product prices (crack spreads) and local differentials.</span></div>
+          <div class="box"><b>Utilization</b><span>High throughput spreads fixed costs; outages can destroy margin capture.</span></div>
+          <div class="box"><b>Complexity</b><span>More complex units can run heavier/cheaper crudes and upgrade yields.</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="Downstream content blocks">
+      <article class="card">
+        <div class="inner">
+          <div class="titleRow">
+            <div class="tag"><span class="dot"></span> Process</div>
+            <div class="tag" style="opacity:.85">Crude → slate</div>
+          </div>
+          <h2>What refineries do</h2>
+          <ul>
+            <li><b>Distillation:</b> separates crude into fractions by boiling range.</li>
+            <li><b>Conversion:</b> cracks heavy molecules into lighter fuels.</li>
+            <li><b>Treating:</b> removes sulfur/impurities to meet specs.</li>
+            <li><b>Blending:</b> mixes components to required grades (octane, vapor pressure).</li>
+            <li><b>Distribution:</b> racks, pipelines, barges, trucks to end markets.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="inner">
+          <div class="titleRow">
+            <div class="tag"><span class="dot" style="background:var(--accent2); box-shadow:0 0 18px rgba(106,168,255,.55);"></span> Economics</div>
+            <div class="tag" style="opacity:.85">Where profit comes from</div>
+          </div>
+          <h2>Key drivers of profitability</h2>
+          <ul>
+            <li><b>Crack spread:</b> product prices minus crude input cost (proxy for margin).</li>
+            <li><b>Yield optimization:</b> produce more of what is valuable given market demand.</li>
+            <li><b>Logistics:</b> advantaged access to crude supply and product outlets.</li>
+            <li><b>Regulatory:</b> specifications and environmental requirements affect costs and blends.</li>
+            <li><b>Maintenance timing:</b> turnarounds and reliability planning are strategic.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card wide">
+        <div class="inner">
+          <div class="titleRow">
+            <div class="tag"><span class="dot" style="background:var(--accent3); box-shadow:0 0 18px rgba(124,255,178,.55);"></span> KPIs</div>
+            <div class="tag" style="opacity:.85">What analysts track</div>
+          </div>
+          <h2>Common downstream metrics</h2>
+          <div class="metrics">
+            <div class="metric"><b>Utilization rate</b><span>Throughput vs nameplate capacity.</span></div>
+            <div class="metric"><b>Crack spread</b><span>Proxy margin between crude and products.</span></div>
+            <div class="metric"><b>Complexity</b><span>Ability to upgrade heavy crudes into high-value products.</span></div>
+            <div class="metric"><b>Energy intensity</b><span>Fuel and power used per barrel processed.</span></div>
+            <div class="metric"><b>Operating cost</b><span>Fixed + variable costs per barrel.</span></div>
+            <div class="metric"><b>Turnaround days</b><span>Planned downtime for maintenance.</span></div>
+            <div class="metric"><b>Product mix</b><span>Gasoline/diesel/jet yields by season and market.</span></div>
+            <div class="metric"><b>Inventory</b><span>Crude and product stocks vs demand.</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card wide">
+        <div class="inner">
+          <div class="titleRow">
+            <div class="tag"><span class="dot"></span> Quick mental model</div>
+            <div class="tag" style="opacity:.85">One sentence</div>
+          </div>
+          <h2>Downstream = margin capture + logistics</h2>
+          <ul>
+            <li>Refining is a continuous process business that monetizes spreads, not volumes alone.</li>
+            <li>Best operators pair advantaged feedstock access with resilient distribution and high uptime.</li>
+            <li>Market structure (local supply/demand) can matter as much as technical configuration.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <span>Back: <a href="midstream.html" style="color:rgba(255,255,255,.78);">Midstream</a></span>
+      <span><a href="terminology.html" style="color:rgba(255,255,255,.78);">Glossary</a></span>
+    </footer>
+  </main>
+
+  <script>
+    (function(){
+      const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+      document.querySelectorAll(".chip").forEach(a=>{
+        const href = (a.getAttribute("href")||"").toLowerCase();
+        a.classList.toggle("active", href === path);
+      });
+    })();
+  </script>
+</body>
+</html>
