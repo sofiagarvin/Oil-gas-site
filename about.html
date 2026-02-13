@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About This Website — Oil & Gas Visual Primer</title>
+  <meta name="description" content="About this website: purpose, scope, and how the glossary/chatbot help users understand oil & gas." />
+
+  <style>
+    :root{
+      --bg:#070A10;
+      --panel: rgba(255,255,255,.06);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --faint: rgba(255,255,255,.55);
+      --accent: #7CFFB2;
+      --accent2:#6AA8FF;
+      --accent3:#FF5BD6;
+      --line: rgba(255,255,255,.12);
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1180px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(1100px 700px at 20% 10%, rgba(106,168,255,.18), transparent 55%),
+        radial-gradient(900px 600px at 80% 20%, rgba(255,91,214,.12), transparent 60%),
+        radial-gradient(900px 700px at 50% 90%, rgba(124,255,178,.10), transparent 60%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+    a{ color:inherit; text-decoration:none; }
+
+    header{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(7,10,16,.92), rgba(7,10,16,.55));
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{
+      max-width: var(--max); margin:0 auto;
+      padding: 14px 22px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      letter-spacing:.6px;
+      font-weight:720;
+    }
+    .logo{
+      width:36px; height:36px; border-radius: 12px;
+      background:
+        radial-gradient(12px 12px at 28% 28%, rgba(255,255,255,.45), transparent 55%),
+        linear-gradient(135deg, rgba(124,255,178,.90), rgba(106,168,255,.80) 55%, rgba(255,91,214,.72));
+      box-shadow: 0 10px 26px rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .navlinks{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .chip{
+      padding:10px 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--muted);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.22);
+      color: rgba(255,255,255,.86);
+    }
+    .chip.active{
+      color: rgba(7,10,16,.90);
+      background: linear-gradient(135deg, rgba(124,255,178,.92), rgba(106,168,255,.85));
+      border-color: transparent;
+    }
+
+    .wrap{ max-width: var(--max); margin:0 auto; padding: 26px 22px 70px; }
+
+    .hero{
+      margin-top: 26px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(760px 360px at 20% 25%, rgba(124,255,178,.14), transparent 60%),
+        radial-gradient(760px 360px at 80% 35%, rgba(106,168,255,.14), transparent 60%),
+        radial-gradient(760px 360px at 55% 95%, rgba(255,91,214,.10), transparent 60%);
+      pointer-events:none;
+      filter: blur(6px);
+    }
+    .heroInner{
+      position:relative;
+      padding: 40px 26px 26px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 18px;
+    }
+    @media (max-width: 900px){
+      .heroInner{ grid-template-columns:1fr; }
+    }
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 1.02;
+      letter-spacing: -.8px;
+    }
+    .sub{
+      margin:0 0 14px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 70ch;
+    }
+
+    .panel{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.20);
+      padding: 16px;
+    }
+    .kicker{
+      font-family: var(--mono);
+      color: rgba(255,255,255,.80);
+      font-size: 12px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .box{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+    .box b{ display:block; font-size: 13px; margin-bottom: 4px; }
+    .box span{ color: var(--muted); font-size: 13px; line-height: 1.45; }
+
+    .grid{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .card{
+      grid-column: span 12;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      box-shadow: 0 18px 46px rgba(0,0,0,.32);
+      overflow:hidden;
+    }
+    .card .topbar{
+      height: 8px;
+      background: linear-gradient(90deg, rgba(124,255,178,.92), rgba(106,168,255,.88), rgba(255,91,214,.82));
+      opacity:.85;
+    }
+    .card .inner{ padding: 18px 18px 16px; }
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(255,255,255,.78);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .dot{ width:8px; height:8px; border-radius:99px; background: var(--accent2); box-shadow: 0 0 18px rgba(106,168,255,.55); }
+    .card h2{ margin:10px 0 8px; font-size: 18px; letter-spacing: -.2px; }
+    .card p{ margin:0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+    .card ul{ margin:10px 0 0; padding-left: 18px; color: var(--muted); line-height: 1.7; font-size: 14px; }
+    .card li{ margin: 6px 0; }
+
+    .footer{
+      margin-top: 42px;
+      color: rgba(255,255,255,.55);
+      font-size: 12px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding-top: 16px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+    .footer a{ color: rgba(255,255,255,.70); }
+    .footer a:hover{ color: rgba(255,255,255,.92); }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="index.html">
+        <span class="logo" aria-hidden="true"></span>
+        <span>Oil &amp; Gas — Visual Primer</span>
+      </a>
+      <div class="navlinks">
+        <a class="chip" href="index.html">Home</a>
+        <a class="chip" href="upstream.html">Upstream</a>
+        <a class="chip" href="midstream.html">Midstream</a>
+        <a class="chip" href="downstream.html">Downstream</a>
+        <a class="chip" href="terminology.html">Terminology</a>
+        <a class="chip active" href="about.html">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="heroInner">
+        <div>
+          <h1>About this website</h1>
+          <p class="sub">
+            This website serves to explain the key operational stages of the oil and gas industry, as well as provide a terminology page to help people understand key terms and definitions in the industry.
+          </p>
+          <p class="sub" style="margin-bottom:0;">
+            The chatbot streamlines the process of finding the definition of a specific word and understanding its context.
+          </p>
+        </div>
+
+        <aside class="panel">
+          <div class="kicker">At a glance</div>
+          <div class="box">
+            <b>What you’ll find</b>
+            <span>Upstream, midstream, and downstream summaries + a searchable terminology reference.</span>
+          </div>
+          <div class="box">
+            <b>How to use it</b>
+            <span>Start with the value chain pages, then use the terminology page (and chatbot) to clarify concepts quickly.</span>
+          </div>
+          <div class="box">
+            <b>Goal</b>
+            <span>Make oil &amp; gas operations and language easier to understand—fast.</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="About details">
+      <article class="card">
+        <div class="topbar"></div>
+        <div class="inner">
+          <div class="tag"><span class="dot"></span> Purpose</div>
+          <h2>Clear structure, fast definitions</h2>
+          <p>
+            The site is designed to provide a simple mental model of how hydrocarbons move from rock to market, and to reduce friction when encountering unfamiliar terms.
+          </p>
+          <ul>
+            <li><b>Operational stages:</b> concise explanations of upstream, midstream, and downstream.</li>
+            <li><b>Terminology:</b> a reference page for key terms and why they matter.</li>
+            <li><b>Chatbot support:</b> quickly find definitions and understand context without digging through documents.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <span>Next: <a href="terminology.html">Terminology</a></span>
+      <span><a href="index.html">Home</a></span>
+    </footer>
+  </main>
+
+  <script>
+    (function(){
+      const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+      document.querySelectorAll(".chip").forEach(a=>{
+        const href = (a.getAttribute("href")||"").toLowerCase();
+        a.classList.toggle("active", href === path);
+      });
+    })();
+  </script>
+</body>
+</html>
