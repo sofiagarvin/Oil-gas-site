@@ -698,6 +698,74 @@
       });
     })();
   </script>
+  <script>
+  (function(){
+    const DATA = {
+      upstream: {
+        tag: "Segment 01",
+        title: "Upstream (E&P)",
+        desc: "Locate hydrocarbons, drill wells, complete them, and produce oil and gas. High uncertainty + capital intensity.",
+        assets: ["Leases & acreage", "Wells, pads, rigs", "Frac fleets & equipment"],
+        drivers: ["Well productivity (type curves)", "Costs (D&C, LOE)", "Realized price & differentials"],
+        kpis: ["EUR", "LOE $/boe", "D&C / well", "PDP / PUD"],
+        link: "upstream.html"
+      },
+      midstream: {
+        tag: "Segment 02",
+        title: "Midstream",
+        desc: "Move, treat, store, and export molecules. Often fee-based with contracts and reliability as the core value drivers.",
+        assets: ["Gathering systems", "Processing plants", "Pipelines & terminals"],
+        drivers: ["Throughput & utilization", "Contract structure (MVC / take-or-pay)", "Uptime & integrity"],
+        kpis: ["Utilization %", "Tariff/fee", "Contract mix", "Downtime"],
+        link: "midstream.html"
+      },
+      downstream: {
+        tag: "Segment 03",
+        title: "Downstream",
+        desc: "Refine crude into fuels and products, then distribute and market. Profitability is spread- and uptime-driven.",
+        assets: ["Refineries", "Blending & racks", "Distribution & retail"],
+        drivers: ["Crack spreads", "Utilization & reliability", "Feedstock access & logistics"],
+        kpis: ["Crack spread", "Utilization", "Complexity", "Energy intensity"],
+        link: "downstream.html"
+      }
+    };
+
+    const nodes = document.querySelectorAll(".node");
+    const btns  = document.querySelectorAll(".segBtn");
+    const tag   = document.getElementById("detailTag");
+    const title = document.getElementById("detailTitle");
+    const desc  = document.getElementById("detailDesc");
+    const assets= document.getElementById("detailAssets");
+    const drivers=document.getElementById("detailDrivers");
+    const kpis  = document.getElementById("detailKpis");
+    const link  = document.getElementById("detailLink");
+
+    function setSeg(seg){
+      const d = DATA[seg];
+      if(!d) return;
+
+      nodes.forEach(n => n.classList.toggle("active", n.dataset.seg === seg));
+      btns.forEach(b => b.classList.toggle("active", b.dataset.seg === seg));
+
+      tag.textContent = d.tag;
+      title.textContent = d.title;
+      desc.textContent = d.desc;
+
+      assets.innerHTML = d.assets.map(x => `<li>${x}</li>`).join("");
+      drivers.innerHTML = d.drivers.map(x => `<li>${x}</li>`).join("");
+      kpis.innerHTML = d.kpis.map(x => `<span class="kpi">${x}</span>`).join("");
+      link.href = d.link;
+    }
+
+    nodes.forEach(n => {
+      n.addEventListener("mouseenter", () => setSeg(n.dataset.seg));
+      n.addEventListener("click", () => setSeg(n.dataset.seg));
+    });
+    btns.forEach(b => b.addEventListener("click", () => setSeg(b.dataset.seg)));
+
+    setSeg("upstream");
+  })();
+</script>
   <script> window.chtlConfig = { chatbotId: "1544589291" } </script>
 <script async data-id="1544589291" id="chtl-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
 </body>
