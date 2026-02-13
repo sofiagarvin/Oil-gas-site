@@ -351,6 +351,100 @@
     </section>
 
     <div class="sectionTitle" id="map">
+      <section class="explorer" aria-label="Interactive value chain explorer">
+  <div class="explorerHead">
+    <div>
+      <h2>Value Chain Explorer</h2>
+      <p>Hover or tap a segment to see what it does, what drives value, and the key metrics to watch.</p>
+    </div>
+    <div class="explorerChips">
+      <button class="segBtn active" data-seg="upstream" type="button">Upstream</button>
+      <button class="segBtn" data-seg="midstream" type="button">Midstream</button>
+      <button class="segBtn" data-seg="downstream" type="button">Downstream</button>
+    </div>
+  </div>
+
+  <div class="explorerGrid">
+    <div class="mapCard">
+      <div class="mapCanvas" role="img" aria-label="Stylized value chain diagram">
+        <div class="node active" data-seg="upstream">
+          <div class="nodeTop">
+            <span class="nodeDot"></span>
+            <b>Upstream</b>
+          </div>
+          <span class="nodeSub">Find • Drill • Produce</span>
+        </div>
+
+        <div class="flowLine"></div>
+
+        <div class="node" data-seg="midstream">
+          <div class="nodeTop">
+            <span class="nodeDot blue"></span>
+            <b>Midstream</b>
+          </div>
+          <span class="nodeSub">Move • Treat • Store</span>
+        </div>
+
+        <div class="flowLine"></div>
+
+        <div class="node" data-seg="downstream">
+          <div class="nodeTop">
+            <span class="nodeDot pink"></span>
+            <b>Downstream</b>
+          </div>
+          <span class="nodeSub">Refine • Market • Distribute</span>
+        </div>
+
+        <div class="pulse" aria-hidden="true"></div>
+      </div>
+
+      <div class="hintBar">
+        Tip: On mobile, tap a segment. On desktop, hover to preview.
+      </div>
+    </div>
+
+    <aside class="detailCard" aria-live="polite">
+      <div class="detailTag" id="detailTag">Segment</div>
+      <h3 id="detailTitle">Upstream (E&amp;P)</h3>
+      <p id="detailDesc">
+        Locate hydrocarbons, drill wells, complete them, and produce oil and gas. High uncertainty + capital intensity.
+      </p>
+
+      <div class="detailCols">
+        <div class="detailBox">
+          <b>Key assets</b>
+          <ul id="detailAssets">
+            <li>Leases &amp; acreage</li>
+            <li>Wells, pads, rigs</li>
+            <li>Frac fleets &amp; equipment</li>
+          </ul>
+        </div>
+
+        <div class="detailBox">
+          <b>Value drivers</b>
+          <ul id="detailDrivers">
+            <li>Well productivity (type curves)</li>
+            <li>Costs (D&amp;C, LOE)</li>
+            <li>Realized price &amp; differentials</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="kpiRow" id="detailKpis">
+        <span class="kpi">EUR</span>
+        <span class="kpi">LOE $/boe</span>
+        <span class="kpi">D&amp;C / well</span>
+        <span class="kpi">PDP / PUD</span>
+      </div>
+
+      <div class="detailActions">
+        <a class="btn primary" id="detailLink" href="upstream.html">Open segment page →</a>
+        <a class="btn" href="terminology.html">Look up terminology</a>
+      </div>
+    </aside>
+  </div>
+</section>
+
       <h2>Value chain map</h2>
       <p>Navigate to each segment for operations, economics, assets, risks, and KPIs.</p>
     </div>
